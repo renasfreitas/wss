@@ -1,0 +1,23 @@
+# Executar, no mínimo, três ferramentas de reconhecimento de subdomínios vistas em aula.
+# subfinder, assetfinder, amass
+
+subfinder -d $1 > files/sub
+assetfinder $1 > files/asset
+
+#amass enum -d $1 > amass
+
+# Organizar as saídas das ferramentas de forma a construir um único arquivo
+
+paste -d '\n' -s files/sub files/asset > files/subdomains
+
+
+# Verificar quais os subdomínios estão “vivos” e se estão usando http ou https.
+# httprobe
+sort files/subdomains | uniq | httprobe > files/alive
+
+# Para os subdomínios vivos, tirar print das telas e salvar em uma pasta específica.
+# GoWitness
+
+./EyeWitness/Python/EyeWitness.py -f files/alive --no-prompt -d prints --web
+
+# Procurar uma forma de salvar e mostrar os subdomínios identificados e as tecnologias que são usadas por cada um.
