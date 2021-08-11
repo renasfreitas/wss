@@ -1,23 +1,48 @@
-# Executar, no mínimo, três ferramentas de reconhecimento de subdomínios vistas em aula.
-# subfinder, assetfinder, amass
+#!/bin/bash
+# Criado por: Guilherme Schneider_Leon_Renã Cruz.
+# Editado por:    Na data:
+# Data: 07112021
 
-subfinder -d $1 > files/sub
-assetfinder $1 > files/asset
+#Entra com o dominio para fazer o recon
+echo "Digite o dominio a ser feito o Recon:"
+read dom
+echo $dom
 
-#amass enum -d $1 > amass
+## Cria os caminhos para salvar as saidas
+mkdir -p $HOME/recon
+mkdir -p $HOME/recon/a17
+
+## Verificar se o GO estah instalado (usado para rodar as ferramentas)
+## Verificar se o subfinder estah instalado (pergunta se quer instalar)
+## Verificar se o assetfinder estah instalado (pergunta se quer instalar)
+## Verificar se o amass esta instalado (pergunta se quer instalar)
+
+## usando subfinder para recon
+subfinder -silent -d $dom >> $HOME/recon/a17/sub_dom1.txt
+
+## usando assetfinder para recon
+#ssetfinder $1 >> $HOME/recon/a17/sub_dom2.txt
+
+## usando amass para recon
+#amass enum -d $1 >> $HOME/recon/a17/sub_dom3.txt
 
 # Organizar as saídas das ferramentas de forma a construir um único arquivo
 
-paste -d '\n' -s files/sub files/asset > files/subdomains
+#paste -d '\n' -s $HOME/recon/a17/sub_dom1.txt $HOME/recon/a17/sub_dom2.txt $HOME/recon/a17/sub_dom3.txt >> $HOME/recon/a17/subdom_final.txt
 
+
+
+
+
+###### parei aqui #########
 
 # Verificar quais os subdomínios estão “vivos” e se estão usando http ou https.
 # httprobe
-sort files/subdomains | uniq | httprobe > files/alive
+#sort files/subdomains | uniq | httprobe > files/alive
 
 # Para os subdomínios vivos, tirar print das telas e salvar em uma pasta específica.
 # GoWitness
 
-./EyeWitness/Python/EyeWitness.py -f files/alive --no-prompt -d prints --web
+#./EyeWitness/Python/EyeWitness.py -f files/alive --no-prompt -d prints --web
 
 # Procurar uma forma de salvar e mostrar os subdomínios identificados e as tecnologias que são usadas por cada um.
