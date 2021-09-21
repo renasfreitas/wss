@@ -16,6 +16,15 @@ mkdir -p $HOME/recon/a17
 ## Verificar se o subfinder estah instalado (pergunta se quer instalar)
 ## Verificar se o assetfinder estah instalado (pergunta se quer instalar)
 ## Verificar se o amass esta instalado (pergunta se quer instalar)
+    #  nome=amass
+    #  teste=`ls /etc/init.d/$nome`;
+    #  if [ $teste ] 
+    #  then
+    #    $teste status
+    #  else
+    #    apt-get install amass
+    #  fi
+
 
 ## usando subfinder para recon
 subfinder -silent -d $dom >> $HOME/recon/a17/sub_dom1.txt
