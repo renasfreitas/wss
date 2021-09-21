@@ -6,11 +6,12 @@
 #Entra com o dominio para fazer o recon
 echo "Digite o dominio a ser feito o Recon:"
 read dom
-echo $dom
+echo "começando o reconhecimento de $dom"
 
 ## Cria os caminhos para salvar as saidas
 mkdir -p $HOME/recon
 mkdir -p $HOME/recon/a17
+echo "Os logs com as saidas podem ser encontrados em $HOME/recon/a17"
 
 ## Verificar se o GO estah instalado (usado para rodar as ferramentas)
 ## Verificar se o subfinder estah instalado (pergunta se quer instalar)
@@ -27,17 +28,17 @@ mkdir -p $HOME/recon/a17
 
 
 ## usando subfinder para recon
-subfinder -silent -d $dom >> $HOME/recon/a17/sub_dom1.txt
+subfinder -silent -d $dom >> $HOME/recon/a17/subfinder.txt
 
 ## usando assetfinder para recon
-#ssetfinder $1 >> $HOME/recon/a17/sub_dom2.txt
+#ssetfinder $1 >> $HOME/recon/a17/assetfinder.txt
 
 ## usando amass para recon
-#amass enum -d $1 >> $HOME/recon/a17/sub_dom3.txt
+#amass enum -d $1 >> $HOME/recon/a17/amass.txt
 
 # Organizar as saídas das ferramentas de forma a construir um único arquivo
 
-#paste -d '\n' -s $HOME/recon/a17/sub_dom1.txt $HOME/recon/a17/sub_dom2.txt $HOME/recon/a17/sub_dom3.txt >> $HOME/recon/a17/subdom_final.txt
+#paste -d '\n' -s $HOME/recon/a17/subfinder.txt $HOME/recon/a17/assetfinder.txt $HOME/recon/a17/amass.txt >> $HOME/recon/a17/subdom_final.txt
 
 
 
