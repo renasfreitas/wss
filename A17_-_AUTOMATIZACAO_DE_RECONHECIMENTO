@@ -28,12 +28,15 @@ echo "Os logs com as saidas podem ser encontrados em $HOME/recon/a17"
 
 
 ## usando subfinder para recon
+echo "Usando o subfinder para recon"
 subfinder -silent -d $dom > $HOME/recon/a17/subfinder.txt
 
 ## usando assetfinder para recon
+echo "Usando o assetfinder para recon"
 assetfinder $dom > $HOME/recon/a17/assetfinder.txt
 
 ## usando amass para recon
+echo "Usando o amass para recon"
 amass enum -d $dom > $HOME/recon/a17/amass.txt
 
 # Organizar as saídas das ferramentas de forma a construir um único arquivo
