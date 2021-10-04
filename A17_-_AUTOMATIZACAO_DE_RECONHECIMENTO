@@ -3,6 +3,12 @@
 # Editado por:    Na data:
 # Data: 07112021
 
+
+echo "\n#####################################################################################"
+echo "Para o Script rodar deve ter as seguintes ferramentas: subfinder, assetfinder, amass"
+echo "\n#####################################################################################"
+
+
 #Entra com o dominio para fazer o recon
 echo "Digite o dominio a ser feito o Recon:"
 read dom
@@ -12,19 +18,6 @@ echo "começando o reconhecimento de $dom"
 mkdir -p $HOME/recon
 mkdir -p $HOME/recon/a17
 echo "Os logs com as saidas podem ser encontrados em $HOME/recon/a17"
-
-## Verificar se o GO estah instalado (usado para rodar as ferramentas)
-## Verificar se o subfinder estah instalado (pergunta se quer instalar)
-## Verificar se o assetfinder estah instalado (pergunta se quer instalar)
-## Verificar se o amass esta instalado (pergunta se quer instalar)
-    #  nome=amass
-    #  teste=`ls /etc/init.d/$nome`;
-    #  if [ $teste ] 
-    #  then
-    #    $teste status
-    #  else
-    #    apt-get install amass
-    #  fi
 
 
 ## usando subfinder para recon
@@ -43,19 +36,22 @@ amass enum -d $dom > $HOME/recon/a17/amass.txt
 
 paste -d '\n' -s $HOME/recon/a17/subfinder.txt $HOME/recon/a17/assetfinder.txt $HOME/recon/a17/amass.txt > $HOME/recon/a17/subdom_final.txt
 
-
-
-
-
-###### parei aqui #########
-
-# Verificar quais os subdomínios estão “vivos” e se estão usando http ou https.
-# httprobe
-#sort files/subdomains | uniq | httprobe > files/alive
+# Usando o HTTPROBE
+echo "Comecando testes de funcionalidade do subdominios:"
+echo "Logs serao salvos em XXX"
+cat $HOME/recon/a17/subdom_final.txt | httprobe > $HOME/recon/a17/httprobe.txt 
+echo "Finalizado o testes de funcionalidade dos subdominios"
 
 # Para os subdomínios vivos, tirar print das telas e salvar em uma pasta específica.
+
 # GoWitness
+#mkdir -p $HOME/recon/a17/screenrecord 
+#cd $HOME/recon/a17/screenrecord 
+#gowitness $HOME/recon/a17/httprobe.txt
 
 #./EyeWitness/Python/EyeWitness.py -f files/alive --no-prompt -d prints --web
 
 # Procurar uma forma de salvar e mostrar os subdomínios identificados e as tecnologias que são usadas por cada um.
+
+eyewitness -f $HOME/recon/a17/httprobe.txt --no-prompt -d screenshot --web
+
